@@ -9,6 +9,9 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.1.53:3306/personale", "root", "root"); //connessione al db
+        //XAMPP --> turned on (apache + mysql)
+        //browser --> http://127.0.01:3306/phpmyadmin
+        
         //rs.getMetaData(); avere informazioni sulla tabella --> soprattutto se la tabella è sconosciuta
 
         Statement stmt = conn.createStatement();
