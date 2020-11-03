@@ -8,10 +8,10 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-        Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.1.53:3306/personale", "root", "root"); //connessione al db
+        Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/personale", "admin", "admin"); //connessione al db
         //XAMPP --> turned on (apache + mysql)
         //browser --> http://127.0.01:3306/phpmyadmin
-        
+
         //rs.getMetaData(); avere informazioni sulla tabella --> soprattutto se la tabella è sconosciuta
 
         Statement stmt = conn.createStatement();
@@ -89,7 +89,7 @@ public class Main {
                     Date dataDelete=java.sql.Date.valueOf(data5);
 
                     Statement stmt5 = conn.createStatement();
-                    stmt5.execute("DELETE from "+nome+" where scadenza<="+dataDelete);// read
+                    stmt5.execute("DELETE FROM "+nome+" WHERE scadenza<'"+dataDelete+"'");// read
                     stmt5.close();
                     break;
 
@@ -147,7 +147,7 @@ public class Main {
     public static void selezionaData(Connection conn, String nome, String dataScadenza) throws SQLException {
         Date data=java.sql.Date.valueOf(dataScadenza);
         Statement stmtData = conn.createStatement();
-        ResultSet rsData = stmtData.executeQuery("SELECT * from "+nome+" where scadenza<="+data);// read
+        ResultSet rsData = stmtData.executeQuery("SELECT * from "+nome+" where scadenza<='"+data+"'");// read
         while (rsData.next()) { //riga record tupla
             System.out.println(rsData.getString(1)+" "+rsData.getString(2)+" "+rsData.getString(3)+" "+rsData.getString(4));
         }
